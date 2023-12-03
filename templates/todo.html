@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+
+body,
+html {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  gap: 0.625%;
+}
+
+a {
+  flex: 1;
+  text-decoration: none;
+  outline-color: transparent;
+  text-align: center;
+  line-height: 3;
+  color: black;
+}
+.header{
+        padding: 60px;
+        text-align: center;
+        background: #1abc9c;
+        color: white;
+        font-size: 50px;
+        }
+
+a:link{
+    padding: .2cm
+}
+a:link,
+a:visited,
+a:focus {
+  background: palegoldenrod;
+  color: black;
+  border-radius: .5rem;
+}
+
+a:hover {
+  background: orange;
+}
+
+a:active {
+  background: darkred;
+  color: white;
+}
+span{
+    border: 15cm;
+}
+
+.btn {
+   color: black;
+  align-items: center;
+  background-clip: padding-box;
+  background-color: palegoldenrod;
+  border: 1px solid transparent;
+  border-radius: .5rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+ padding: .2cm;
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+    </style>
+</head>
+<body class="body">
+    <h1 class="header">Todos List</h1>
+    <ul>
+        {% for todo in todos %}
+        <li>
+           <p {%if todo[ 'done' ]%} style="text-decoration: line-through;" {%endif%}>{{ todo['task'] }}</p>
+           <a href="{{ url_for('check', index1=loop.index0) }}">Check</a>
+           <a href="{{ url_for('edit', index1=loop.index0) }}">Edit</a>
+           <a href="{{ url_for('delete', index1=loop.index0) }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('add') }}" method="post">
+        <input type="text" name="todo">
+        <button type="submit" class = btn>Add Todo</button>
+    </form>
+</body>
+</html>
